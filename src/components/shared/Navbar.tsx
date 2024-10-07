@@ -1,5 +1,6 @@
 "use client";
 
+import { parseToken } from "@/utils/parseToken";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 type UserProps = {
@@ -11,6 +12,9 @@ type UserProps = {
 };
 
 const Navbar = ({ session }: { session: UserProps | null }) => {
+  const token = localStorage.getItem("accessToken");
+  const user = parseToken(token as string);
+
   return (
     <div className="navbar bg-base-100  border-b  w-[90%] mx-auto">
       <div className="navbar-start">
@@ -69,10 +73,13 @@ const Navbar = ({ session }: { session: UserProps | null }) => {
         </ul>
       </div>
       <div className="navbar-end">
-        {session?.user ? (
+        {session?.user || user ? (
           <button
             className="btn btn-error btn-outline text-white rounded-full px-5"
-            onClick={() => signOut()}
+            onClick={() => {
+              signOut();
+              localStorage.removeItem("accessToken");
+            }}
           >
             Logout
           </button>

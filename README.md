@@ -1,4 +1,6 @@
-# Next.Js-Authentication-Starter-Pack
+# Next.Js-Authentication
+
+### [Live View](https://next-auth-ten-lake.vercel.app)
 
 ## Installation:
 

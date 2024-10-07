@@ -3,7 +3,12 @@ import { getServerSession } from "next-auth";
 import Image from "next/image";
 
 const DashboardPage = async () => {
+  // user from next auth session
   const session = await getServerSession(authOptions);
+
+  // user from custom server session
+  // const token = localStorage.getItem("accessToken");
+  // const user = parseToken(token as string);
   return (
     <div>
       {session?.user && (
